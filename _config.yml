@@ -1,2 +1,8 @@
 title: NomadFi
 theme: jekyll-theme-minimal
+# Jekyll excludes dotfile directories by default. Explicitly include
+# `.well-known` so GitHub Pages serves
+# `.well-known/apple-app-site-association`, which iOS requires for
+# associated-domains / universal-link handling.
+include:
+  - .well-known

@@ -1,0 +1,19 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["2MPMKAF986.com.arieljtyson.NomadFi"],
+        "components": [
+          {
+            "/": "/plaid-oauth",
+            "comment": "Plaid OAuth universal-link return path."
+          },
+          {
+            "/": "/plaid-oauth/*",
+            "comment": "Plaid OAuth return paths with trailing segments."
+          }
+        ]
+      }
+    ]
+  }
+}

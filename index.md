@@ -15,7 +15,7 @@ It helps users:
 
 ## Platform
 
-NomadFi is built for **iPhone and iPad**.
+NomadFi is built for **iPhone**.
 
 ## Privacy
 
@@ -26,10 +26,13 @@ NomadFi is designed so that financial data stays on device unless you explicitly
 - no third-party tracking
 - optional Apple FinanceKit access only with explicit user consent on eligible devices
 
+## Support
+
+Questions, problems or feedback? Email **[arieltyson30190@gmail.com](mailto:arieltyson30190@gmail.com?subject=NomadFi%20Support)** and include your iPhone model, iOS version and NomadFi version (Settings → General → About on your iPhone shows the first two). You'll get a reply as soon as possible.
+
 ## Links
 
 - [Privacy Policy](./privacy/)
-- Contact: `arieltyson30190@gmail.com`
 
 ## Status
 

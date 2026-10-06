@@ -139,4 +139,4 @@ If NomadFi's privacy model changes materially, this page will be updated and the
 
 If you have questions about this privacy policy, contact:
 
-**arieltyson30190@gmail.com**
+**[arieltyson30190@gmail.com](mailto:arieltyson30190@gmail.com?subject=NomadFi%20Privacy)**

@@ -33,6 +33,7 @@ Questions, problems or feedback? Email **[arieltyson30190@gmail.com](mailto:arie
 ## Links
 
 - [Privacy Policy](./privacy/)
+- [Accessibility](https://arieltyson.github.io/nomadfi-accessibility/)
 
 ## Status
 

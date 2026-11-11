@@ -4,19 +4,20 @@ title: NomadFi Privacy Policy
 
 # NomadFi Privacy Policy
 
-**Last updated:** April 23, 2026
+**Last updated:** November 10, 2026
 
 NomadFi is a privacy-first financial decision app for people whose financial lives span more than one country. The app is designed to help users choose the right card, reduce avoidable fees, manage credit timing, and organize supporting financial context without turning their financial history into an ad-tech profile.
 
-NomadFi is built around a simple rule: **your financial data stays on your device unless you explicitly export or share something yourself.**
+NomadFi is built around a simple rule: **your financial data stays on your device unless you explicitly export or share something yourself, or turn on Bank Connections.** Bank Connections is optional. It is the only feature that stores financial records on a server, and it is described in full below.
 
 ## Summary
 
-- **No account sign-up required**
+- **No account sign-up required** for the app itself; Bank Connections uses Sign in with Apple
 - **No analytics**
 - **No advertising SDKs**
 - **No third-party tracking**
-- **No server-side storage of your financial records**
+- **No server-side storage of your financial records unless you turn on Bank Connections**, which stores bank balances and transactions in Canada so they stay current while your iPhone is closed
+- **Ask FiBot answers on your device** with Apple Intelligence; your questions and its answers are never sent to NomadFi
 - **Optional Apple FinanceKit access only with explicit user consent**
 
 ## Data NomadFi Stores On Your Device
@@ -32,6 +33,50 @@ NomadFi is built around a simple rule: **your financial data stays on your devic
 | **Exchange-rate cache** | Supports FX and fee-awareness features | On-device only | Refreshed over time and removable with Delete All My Data |
 | **App lock settings** | Stores whether App Lock is enabled and the timeout you choose | Device-only Keychain | Until you change the setting or delete all app data |
 | **Notification preferences and pending reminder state** | Lets the app schedule local reminders you opt into | On-device only | Until you change settings, the reminder fires, or you delete all app data |
+
+## Bank Connections (optional)
+
+Bank Connections links your bank accounts through [Plaid](https://plaid.com) so NomadFi stays up to date without you importing anything. It is off until you turn it on in **Settings › Financial Connections › Bank Connections**, agree to server storage, and sign in with Apple.
+
+### How it works
+
+1. **You sign in with Apple.** NomadFi asks Apple for no name and no email address. Apple gives NomadFi a random identifier that is unique to NomadFi; NomadFi uses it only to tell your data apart from anyone else's.
+2. **You sign in to your bank through Plaid.** Your bank username, password and security answers go to Plaid and your bank, never to NomadFi. Plaid's handling of your data is described in the [Plaid End User Privacy Policy](https://plaid.com/legal/#end-user-privacy-policy).
+3. **NomadFi's server keeps your bank data current.** When your bank reports new activity, Plaid notifies NomadFi's server, which fetches the changes. Your iPhone downloads them the next time you open NomadFi.
+
+### What NomadFi's server stores
+
+| Data | Purpose |
+|---|---|
+| **The random Apple identifier** and hashes of your NomadFi session keys | Recognising you and keeping others out |
+| **Plaid access tokens** for each bank you connect, encrypted with Google Cloud Key Management | Fetching updates from your bank through Plaid |
+| **Bank connection details**: bank name, connection status and when data was last fetched | Showing each bank's status and keeping it updated |
+| **Accounts**: name, type, currency, current and available balance, and credit limit (no account or card numbers) | Your dashboard, net worth and decisions |
+| **Transactions**: date and authorized date, amount, currency, description, merchant, category and whether they are pending (no locations) | Your ledger, spending summaries and decisions |
+| **Delivery records** of which updates your iPhone has saved | Sending each change once, and none twice |
+| **If you turn on FiBot monitoring**: the financial plan you confirm and the alerts it produces | Checking your plan against new bank activity |
+
+The server does **not** store your bank credentials, receipts, tax documents, notes, decision drafts, FiBot conversations, location or anything you keep only on your device.
+
+### Where it is stored and who processes it
+
+- **NomadFi's server** runs on **Google Cloud** in Montréal, Canada (Cloud Run, Secret Manager, Cloud Key Management and Cloud Scheduler).
+- **The database** is a PostgreSQL database run by **Supabase** on Amazon Web Services in Montréal, Canada (region `ca-central-1`). It is reachable only by NomadFi's server over encrypted connections; it is not exposed to the internet through any public data API.
+- **Plaid** connects to your bank and may process data in the United States.
+- **Apple** provides Sign in with Apple and tells NomadFi's server if you stop using Sign in with Apple with NomadFi.
+
+These providers process data on NomadFi's behalf and under their own security and privacy terms. Storing data in Canada does not mean every provider processes it only in Canada.
+
+### Logs
+
+Google Cloud records basic request logs for NomadFi's server, including your IP address, the time and the address requested, for about 30 days. NomadFi's own logs record events such as "sync finished" and never include balances, transactions, account names or tokens. Rate limiting uses a keyed hash of IP addresses, not the addresses themselves.
+
+### Retention and deletion
+
+- **Disconnecting a bank** stops updates immediately, asks Plaid to revoke NomadFi's access, and deletes that bank's encrypted access token once Plaid confirms. History already on your iPhone stays there.
+- **Delete All My Data** first asks NomadFi's server to delete your hosted account. The server stops all updates, revokes Plaid and Sign in with Apple access, then deletes every bank record it holds for you.
+- **Signing out** of Bank Connections ends your session on that iPhone; your hosted data stays until you disconnect or delete it.
+- **Backups:** NomadFi does not currently keep backups of hosted bank data, so deleted data is gone once deletion finishes. If that changes, this policy and the app will state how long backups are kept.
 
 ## Permissions NomadFi May Request
 
@@ -65,7 +110,13 @@ The main exception today is exchange-rate lookup:
 - Those requests contain currency codes only
 - NomadFi does **not** send your balances, transactions, receipts, names, or account identifiers in those requests
 
-NomadFi does **not** upload your receipts, tax documents, balances, transactions, subscriptions, or decision history to a NomadFi server.
+If you turn on Bank Connections, bank balances and transactions are stored on NomadFi's server as described in [Bank Connections](#bank-connections-optional).
+
+NomadFi does **not** upload your receipts, tax documents, subscriptions, notes or decision history to a NomadFi server. Balances and transactions you enter manually, import from CSV or read through FinanceKit stay on your device.
+
+## Ask FiBot
+
+Ask FiBot answers questions about your finances with Apple Intelligence's on-device model. NomadFi builds a short list of facts from the data on your iPhone, the model answers from those facts, and NomadFi checks every figure in the answer against them. Your questions, the facts and the answers stay on your iPhone and are never saved: they are cleared when you start a new conversation or NomadFi closes.
 
 ## Receipt Images and OCR
 
@@ -85,7 +136,7 @@ Notification content is designed to avoid exposing sensitive financial details o
 
 ## What NomadFi Does Not Collect
 
-- **No email address or account registration**
+- **No email address**; Bank Connections uses Sign in with Apple without requesting your name or email
 - **No advertising identifier**
 - **No analytics events**
 - **No cross-app tracking**
@@ -99,7 +150,7 @@ Notification content is designed to avoid exposing sensitive financial details o
 
 NomadFi does not sell, rent, or share your financial data with advertisers or data brokers.
 
-Your data only leaves your device when **you** explicitly choose to share or export something, such as:
+Your data only leaves your device when **you** turn on Bank Connections (see above) or explicitly choose to share or export something, such as:
 
 - exporting a report
 - sharing a document through Apple's share sheet
@@ -114,6 +165,7 @@ NomadFi includes security features designed to reduce accidental exposure:
 - privacy blur in the app switcher when the app backgrounds
 - device-only Keychain storage for sensitive app settings
 - metadata stripping for stored and exported receipt images
+- for Bank Connections: encrypted connections everywhere, bank access tokens encrypted with Google Cloud Key Management and readable only by NomadFi's server, sign-in limited to approved Apple accounts during the pilot, and a database that refuses access to anything but NomadFi's server
 
 No software can guarantee absolute security, but NomadFi is intentionally designed to minimize how much sensitive data can leave your device in the first place.
 
@@ -125,7 +177,7 @@ You can permanently remove your data from inside the app:
 - Go to **Privacy & Security**
 - Choose **Delete All My Data**
 
-That flow is designed to remove app records, receipt images, Keychain items used by the app, local notification state, and other locally stored NomadFi data.
+That flow is designed to remove app records, receipt images, Keychain items used by the app, local notification state, and other locally stored NomadFi data. If you use Bank Connections, it first asks NomadFi's server to delete your hosted data as described in [Retention and deletion](#retention-and-deletion), and keeps your local data if that request can't be confirmed, so you can try again.
 
 ## Children's Privacy
 

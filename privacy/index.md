@@ -31,7 +31,6 @@ NomadFi is built around a simple rule: **your financial data stays on your devic
 | **Receipt images you choose to import** | Lets NomadFi run on-device OCR and show the original image in Tax Vault | On-device only (`Documents/receipts/` in the app sandbox) | Until you delete the document, or use Delete All My Data |
 | **OCR text extracted from receipts** | Supports receipt review and category suggestions | On-device only | Stored only if you save the scanned result |
 | **Exchange-rate cache** | Supports FX and fee-awareness features | On-device only | Refreshed over time and removable with Delete All My Data |
-| **App lock settings** | Stores whether App Lock is enabled and the timeout you choose | Device-only Keychain | Until you change the setting or delete all app data |
 | **Notification preferences and pending reminder state** | Lets the app schedule local reminders you opt into | On-device only | Until you change settings, the reminder fires, or you delete all app data |
 
 ## Bank Connections (optional)
@@ -161,7 +160,8 @@ Granting FinanceKit authorization does **not** send your financial data to a Nom
 
 NomadFi includes security features designed to reduce accidental exposure:
 
-- optional App Lock using Face ID, Touch ID, or device passcode
+- app files that are unreadable while your iPhone is locked
+- compatibility with iOS's own Require Face ID for apps, which you can turn on by touching and holding the NomadFi icon
 - privacy blur in the app switcher when the app backgrounds
 - device-only Keychain storage for sensitive app settings
 - metadata stripping for stored and exported receipt images

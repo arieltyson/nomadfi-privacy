@@ -95,6 +95,12 @@ If you choose to add a receipt to Tax Vault, NomadFi uses Apple's photo picker s
 
 NomadFi may request location access to detect your current country for payment and card recommendations. The app does **not** store your coordinates in its financial records, and location is not used for analytics or advertising.
 
+If you tap **Near Me** in the purchase card check, NomadFi takes one location reading and sends it to Apple Maps to list the places around you. NomadFi keeps only the name and type of the place you choose, never your coordinates.
+
+### Microphone and Speech Recognition
+
+If you tap **Say It** in the purchase card check, NomadFi listens while that sheet is open and turns what you say into a purchase to check. Recognition runs on your iPhone. Your voice is not recorded, saved or sent to NomadFi or anyone else, and if your iPhone cannot recognise speech on device, the feature is unavailable rather than using a server.
+
 ### Notifications
 
 NomadFi may request notification permission for reminders you opt into, such as subscription reminders, budget alerts, exchange-rate movements, and credit-card statement close or payment due reminders. These are scheduled locally on your device.
